@@ -14,8 +14,16 @@ from src.m5_enrichment import enrich_chunks
 from config import RERANK_TOP_K
 
 
+def _setup_console() -> None:
+    for stream_name in ("stdout", "stderr"):
+        stream = getattr(sys, stream_name, None)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 def build_pipeline():
     """Build production RAG pipeline."""
+    _setup_console()
     print("=" * 60)
     print("PRODUCTION RAG PIPELINE")
     print("=" * 60, flush=True)
@@ -85,6 +93,7 @@ def run_query(query: str, search: HybridSearch, reranker: CrossEncoderReranker) 
 
 def evaluate_pipeline(search: HybridSearch, reranker: CrossEncoderReranker):
     """Run evaluation on test set."""
+    _setup_console()
     test_set = load_test_set()
     print(f"\n[Eval] Running {len(test_set)} queries...", flush=True)
     questions, answers, all_contexts, ground_truths = [], [], [], []

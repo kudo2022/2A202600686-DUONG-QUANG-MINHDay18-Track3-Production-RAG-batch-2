@@ -15,7 +15,15 @@ from src.m4_eval import load_test_set, evaluate_ragas, save_report
 from config import NAIVE_COLLECTION
 
 
+def _setup_console() -> None:
+    for stream_name in ("stdout", "stderr"):
+        stream = getattr(sys, stream_name, None)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 def main():
+    _setup_console()
     print("=" * 60)
     print("BASIC RAG BASELINE")
     print("(paragraph chunking + dense-only, no rerank, no enrichment)")

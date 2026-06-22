@@ -10,9 +10,18 @@ Usage:
 import json
 import os
 import time
+import sys
+
+
+def _setup_console() -> None:
+    for stream_name in ("stdout", "stderr"):
+        stream = getattr(sys, stream_name, None)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
 
 
 def main():
+    _setup_console()
     print("=" * 60)
     print("LAB 18: PRODUCTION RAG PIPELINE")
     print("=" * 60)

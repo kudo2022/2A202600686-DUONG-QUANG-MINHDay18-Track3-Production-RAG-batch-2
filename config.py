@@ -5,8 +5,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+def _clean_openai_key(value: str | None) -> str:
+    value = (value or "").strip()
+    if not value:
+        return ""
+    if value.endswith("...") or value == "sk-..." or "[your_key]" in value.lower():
+        return ""
+    return value
+
 # --- API Keys ---
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_API_KEY = _clean_openai_key(os.getenv("OPENAI_API_KEY", ""))
 
 # --- Qdrant ---
 QDRANT_HOST = "localhost"

@@ -9,6 +9,14 @@ import json
 import os
 import sys
 import subprocess
+import re
+
+
+def _setup_console() -> None:
+    for stream_name in ("stdout", "stderr"):
+        stream = getattr(sys, stream_name, None)
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
 
 
 def check_file(path: str, required: bool = True) -> bool:
@@ -54,21 +62,21 @@ def check_todos() -> int:
 def run_tests() -> tuple[int, int]:
     """Run pytest and return (passed, total)."""
     try:
+        python_exe = sys.executable
+        venv_python = os.path.join(".venv", "Scripts", "python.exe")
+        if os.path.exists(venv_python):
+            python_exe = venv_python
         result = subprocess.run(
-            [sys.executable, "-m", "pytest", "tests/", "-v", "--tb=no", "-q"],
-            capture_output=True, text=True, timeout=120,
+            [python_exe, "-m", "pytest", "tests/", "-v", "--tb=no", "-q"],
+            capture_output=True, text=True, timeout=1800,
         )
-        lines = result.stdout.strip().split("\n")
-        summary = lines[-1] if lines else ""
-        # Parse "X passed, Y failed" or "X passed"
+        output = "\n".join([result.stdout or "", result.stderr or ""])
         passed = total = 0
-        for part in summary.split(","):
-            part = part.strip()
-            if "passed" in part:
-                passed = int(part.split()[0])
-                total += passed
-            if "failed" in part:
-                total += int(part.split()[0])
+        summary_match = re.search(r"(\d+)\s+passed(?:,\s*(\d+)\s+failed)?", output)
+        if summary_match:
+            passed = int(summary_match.group(1))
+            failed = int(summary_match.group(2) or 0)
+            total = passed + failed
         return passed, total
     except Exception as e:
         print(f"  ⚠️  pytest error: {e}")
@@ -76,6 +84,7 @@ def run_tests() -> tuple[int, int]:
 
 
 def validate():
+    _setup_console()
     print("🔍 Kiểm tra bài nộp Lab 18: Production RAG\n")
     errors = 0
 

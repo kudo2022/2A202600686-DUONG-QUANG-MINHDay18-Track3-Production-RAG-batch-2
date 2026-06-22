@@ -1,0 +1,10 @@
+{
+  "aggregate": {
+    "faithfulness": 0.4518593834242262,
+    "answer_relevancy": 0.2407338330695564,
+    "context_precision": 0.17675762365445696,
+    "context_recall": 0.1417004054428381
+  },
+  "num_questions": 20,
+  "failures": []
+}

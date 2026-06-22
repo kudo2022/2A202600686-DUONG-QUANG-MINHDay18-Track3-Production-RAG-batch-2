@@ -1,0 +1,81 @@
+{
+  "aggregate": {
+    "faithfulness": 0.5111895301776014,
+    "answer_relevancy": 0.26858899830015953,
+    "context_precision": 0.18995610732965532,
+    "context_recall": 0.18116548027569365
+  },
+  "num_questions": 20,
+  "failures": [
+    {
+      "question": "Muốn mua thiết bị trị giá 55 triệu cần ai phê duyệt?",
+      "worst_metric": "context_recall",
+      "score": 0.2094,
+      "diagnosis": "Missing relevant chunks during retrieval",
+      "suggested_fix": "Improve chunking, enrichment, or hybrid retrieval coverage."
+    },
+    {
+      "question": "Lương thử việc của nhân viên Junior mức cao nhất là bao nhiêu?",
+      "worst_metric": "context_recall",
+      "score": 0.2217,
+      "diagnosis": "Missing relevant chunks during retrieval",
+      "suggested_fix": "Improve chunking, enrichment, or hybrid retrieval coverage."
+    },
+    {
+      "question": "Khi phát hiện malware trên máy, nhân viên có nên tự xử lý không?",
+      "worst_metric": "context_precision",
+      "score": 0.2293,
+      "diagnosis": "Too many irrelevant chunks retrieved",
+      "suggested_fix": "Add reranking, metadata filters, or reduce retrieval breadth."
+    },
+    {
+      "question": "Có cần kích hoạt xác thực đa yếu tố (MFA) không?",
+      "worst_metric": "context_precision",
+      "score": 0.2389,
+      "diagnosis": "Too many irrelevant chunks retrieved",
+      "suggested_fix": "Add reranking, metadata filters, or reduce retrieval breadth."
+    },
+    {
+      "question": "Phụ cấp ăn trưa hàng tháng là bao nhiêu?",
+      "worst_metric": "context_recall",
+      "score": 0.2512,
+      "diagnosis": "Missing relevant chunks during retrieval",
+      "suggested_fix": "Improve chunking, enrichment, or hybrid retrieval coverage."
+    },
+    {
+      "question": "Bao lâu phải đổi mật khẩu một lần?",
+      "worst_metric": "answer_relevancy",
+      "score": 0.2607,
+      "diagnosis": "Answer does not directly address the user question",
+      "suggested_fix": "Refine the generation prompt and question-to-context alignment."
+    },
+    {
+      "question": "Nhân viên tạm ứng 15 triệu, sau 20 ngày mới thanh toán. Bị phạt bao nhiêu?",
+      "worst_metric": "context_precision",
+      "score": 0.2763,
+      "diagnosis": "Too many irrelevant chunks retrieved",
+      "suggested_fix": "Add reranking, metadata filters, or reduce retrieval breadth."
+    },
+    {
+      "question": "Nhân viên được nghỉ bao nhiêu ngày phép năm?",
+      "worst_metric": "context_recall",
+      "score": 0.2804,
+      "diagnosis": "Missing relevant chunks during retrieval",
+      "suggested_fix": "Improve chunking, enrichment, or hybrid retrieval coverage."
+    },
+    {
+      "question": "Một nhân viên Senior có 9 năm thâm niên được nghỉ bao nhiêu ngày phép năm và lương trong khoảng nào?",
+      "worst_metric": "context_recall",
+      "score": 0.2805,
+      "diagnosis": "Missing relevant chunks during retrieval",
+      "suggested_fix": "Improve chunking, enrichment, or hybrid retrieval coverage."
+    },
+    {
+      "question": "Nghỉ phép không lương 20 ngày cần ai phê duyệt?",
+      "worst_metric": "context_precision",
+      "score": 0.2885,
+      "diagnosis": "Too many irrelevant chunks retrieved",
+      "suggested_fix": "Add reranking, metadata filters, or reduce retrieval breadth."
+    }
+  ]
+}
